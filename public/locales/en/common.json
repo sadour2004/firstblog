@@ -1,0 +1,89 @@
+{
+  "home": {
+    "title": "Moroccan Tourism Blog",
+    "description": "Discover the best of tourism in Morocco",
+    "hero": {
+      "title": "Discover the Beauty of Morocco",
+      "subtitle": "Explore the vibrant cities of Tangier, Rabat, Marrakech, Casablanca, and Fez",
+      "cta": "Start Your Journey"
+    },
+    "destinations": {
+      "title": "Featured Destinations",
+      "explore": "Explore"
+    },
+    "featured": {
+      "title": "Featured Articles",
+      "readMore": "Read More"
+    },
+    "newsletter": {
+      "title": "Stay Updated with Our Travel Tips",
+      "description": "Subscribe to our newsletter for the latest travel guides and updates",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe"
+    },
+    "welcome": "Welcome to Moroccan Tourism Blog",
+    "intro": "Explore the vibrant cities of Tangier, Rabat, Marrakech, Casablanca, and Fez."
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "footer": {
+    "importantLinks": "Important Links",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "socialMedia": "Social Media",
+    "newsletter": "Newsletter Signup",
+    "emailPlaceholder": "Enter your email",
+    "subscribe": "Subscribe",
+    "copyright": "© 2025 Moroccan Tourism Blog. All Rights Reserved."
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Learn more about our mission to promote Moroccan tourism",
+    "introduction": {
+      "title": "Our Mission",
+      "content": "We are dedicated to showcasing the rich cultural heritage and diverse attractions of Morocco's most beautiful cities. Our goal is to provide travelers with authentic insights and practical information to make their Moroccan journey unforgettable."
+    },
+    "story": {
+      "title": "Our Story",
+      "content": "Founded by passionate travelers and local experts, our blog combines insider knowledge with professional travel writing to bring you the most comprehensive guide to Moroccan tourism."
+    },
+    "vision": {
+      "title": "Our Vision",
+      "content": "We aim to be the most trusted resource for travelers planning their Moroccan adventure, offering detailed guides, cultural insights, and practical tips for exploring Tangier, Rabat, Marrakech, Casablanca, and Fez."
+    },
+    "expertise": {
+      "title": "Our Expertise",
+      "content": "Our team consists of experienced travel writers, photographers, and local guides who have extensive knowledge of Morocco's tourism landscape. We regularly update our content to provide the most current and accurate information."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Latest articles about tourism in Morocco",
+    "categories": "Categories",
+    "readMore": "Read More",
+    "featured": "Featured Posts",
+    "latest": "Latest Posts",
+    "popular": "Popular Posts"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with us for any inquiries about Moroccan tourism",
+    "form": {
+      "title": "Send us a Message",
+      "name": "Your Name",
+      "email": "Your Email",
+      "message": "Your Message",
+      "submit": "Send Message"
+    },
+    "info": {
+      "title": "Contact Information",
+      "email": "Email",
+      "phone": "Phone",
+      "social": "Social Media"
+    }
+  }
+} 

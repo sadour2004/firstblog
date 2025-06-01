@@ -1,0 +1,89 @@
+{
+  "home": {
+    "title": "Blog de Tourisme Marocain",
+    "description": "Découvrez le meilleur du tourisme au Maroc",
+    "hero": {
+      "title": "Découvrez la Beauté du Maroc",
+      "subtitle": "Explorez les villes vibrantes de Tanger, Rabat, Marrakech, Casablanca et Fès",
+      "cta": "Commencez Votre Voyage"
+    },
+    "destinations": {
+      "title": "Destinations en Vedette",
+      "explore": "Explorer"
+    },
+    "featured": {
+      "title": "Articles en Vedette",
+      "readMore": "Lire la Suite"
+    },
+    "newsletter": {
+      "title": "Restez Informé de Nos Conseils de Voyage",
+      "description": "Abonnez-vous à notre newsletter pour les derniers guides de voyage et mises à jour",
+      "placeholder": "Entrez votre adresse email",
+      "subscribe": "S'abonner"
+    },
+    "welcome": "Bienvenue sur le Blog de Tourisme Marocain",
+    "intro": "Explorez les villes vibrantes de Tanger, Rabat, Marrakech, Casablanca et Fès."
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À Propos",
+    "blog": "Blog",
+    "contact": "Contact"
+  },
+  "footer": {
+    "importantLinks": "Liens Importants",
+    "privacy": "Politique de Confidentialité",
+    "terms": "Conditions d'Utilisation",
+    "socialMedia": "Réseaux Sociaux",
+    "newsletter": "Inscription à la Newsletter",
+    "emailPlaceholder": "Entrez votre email",
+    "subscribe": "S'abonner",
+    "copyright": "© 2025 Blog de Tourisme Marocain. Tous droits réservés."
+  },
+  "about": {
+    "title": "À Propos",
+    "description": "Découvrez notre mission de promouvoir le tourisme marocain",
+    "introduction": {
+      "title": "Notre Mission",
+      "content": "Nous nous consacrons à mettre en valeur le riche patrimoine culturel et les attractions diverses des plus belles villes du Maroc. Notre objectif est de fournir aux voyageurs des informations authentiques et pratiques pour rendre leur voyage marocain inoubliable."
+    },
+    "story": {
+      "title": "Notre Histoire",
+      "content": "Fondé par des voyageurs passionnés et des experts locaux, notre blog combine les connaissances internes et l'écriture professionnelle de voyage pour vous offrir le guide le plus complet du tourisme marocain."
+    },
+    "vision": {
+      "title": "Notre Vision",
+      "content": "Nous visons à être la ressource la plus fiable pour les voyageurs planifiant leur aventure marocaine, offrant des guides détaillés, des aperçus culturels et des conseils pratiques pour explorer Tanger, Rabat, Marrakech, Casablanca et Fès."
+    },
+    "expertise": {
+      "title": "Notre Expertise",
+      "content": "Notre équipe se compose d'écrivains de voyage expérimentés, de photographes et de guides locaux qui possèdent une vaste connaissance du paysage touristique marocain. Nous mettons régulièrement à jour notre contenu pour fournir les informations les plus récentes et précises."
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "description": "Derniers articles sur le tourisme au Maroc",
+    "categories": "Catégories",
+    "readMore": "Lire la Suite",
+    "featured": "Articles en Vedette",
+    "latest": "Derniers Articles",
+    "popular": "Articles Populaires"
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "description": "Contactez-nous pour toute question sur le tourisme marocain",
+    "form": {
+      "title": "Envoyez-nous un Message",
+      "name": "Votre Nom",
+      "email": "Votre Email",
+      "message": "Votre Message",
+      "submit": "Envoyer le Message"
+    },
+    "info": {
+      "title": "Informations de Contact",
+      "email": "Email",
+      "phone": "Téléphone",
+      "social": "Réseaux Sociaux"
+    }
+  }
+} 
