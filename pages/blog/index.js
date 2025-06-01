@@ -154,8 +154,8 @@ export default function Blog({ posts, categories, featuredCategories }) {
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
                       className="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    />
-                  </div>
+                  />
+                </div>
                   <div className="flex gap-3">
                     <select
                       value={sortBy}
@@ -204,17 +204,17 @@ export default function Blog({ posts, categories, featuredCategories }) {
                               </span>
                             )}
                             <h3 className="text-lg font-bold text-white mb-2">
-                              {post.title}
+                      {post.title}
                             </h3>
                             <p className="text-sm text-gray-200 mb-3 line-clamp-2">
                               {post.excerpt}
                             </p>
-                            <Link
-                              href={`/blog/${post.slug}`}
+                  <Link
+                    href={`/blog/${post.slug}`}
                               className="inline-flex items-center text-sm text-white hover:text-blue-400 transition-colors"
-                            >
-                              {t('blog.readMore')} →
-                            </Link>
+                  >
+                    {t('blog.readMore')} →
+                  </Link>
                           </div>
                         </div>
                       </div>
