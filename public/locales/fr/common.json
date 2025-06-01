@@ -38,52 +38,148 @@
     "newsletter": "Inscription à la Newsletter",
     "emailPlaceholder": "Entrez votre email",
     "subscribe": "S'abonner",
-    "copyright": "© 2025 Blog de Tourisme Marocain. Tous droits réservés."
+    "copyright": "© 2025 Blog de Tourisme Marocain. Tous droits réservés.",
+    "about": "Découvrez la beauté et la culture du Maroc à travers nos guides de voyage complets et nos aperçus.",
+    "quickLinks": "Liens Rapides",
+    "destinations": "Destinations Populaires",
+    "newsletterDescription": "Abonnez-vous à notre newsletter pour les derniers guides de voyage, conseils et mises à jour sur le Maroc.",
+    "sitemap": "Plan du Site"
   },
   "about": {
     "title": "À Propos",
-    "description": "Découvrez notre mission de promouvoir le tourisme marocain",
+    "subtitle": "Découvrez la riche culture et la beauté du Maroc à travers nos guides de voyage experts",
     "introduction": {
       "title": "Notre Mission",
-      "content": "Nous nous consacrons à mettre en valeur le riche patrimoine culturel et les attractions diverses des plus belles villes du Maroc. Notre objectif est de fournir aux voyageurs des informations authentiques et pratiques pour rendre leur voyage marocain inoubliable."
+      "content": "Nous nous consacrons à mettre en valeur la beauté authentique du Maroc, de ses villes vibrantes à ses paysages sereins. Notre mission est de fournir aux voyageurs des connaissances complètes et approfondies qui vont au-delà de l'expérience touristique typique.",
+      "values": {
+        "authenticity": "Expériences locales authentiques",
+        "expertise": "Conseils de voyage experts",
+        "community": "Forts liens avec la communauté locale"
+      },
+      "cta": "Explorer Notre Blog"
     },
     "story": {
       "title": "Notre Histoire",
-      "content": "Fondé par des voyageurs passionnés et des experts locaux, notre blog combine les connaissances internes et l'écriture professionnelle de voyage pour vous offrir le guide le plus complet du tourisme marocain."
+      "content": "Fondé par des voyageurs passionnés et des experts locaux, notre parcours a commencé avec une idée simple : partager la véritable essence du Maroc avec le monde. À travers des années d'exploration et de connexion avec les communautés locales, nous avons construit une plateforme qui rapproche les cultures et crée des expériences de voyage significatives.",
+      "milestone1": "Début comme un petit blog de voyage en 2020",
+      "milestone2": "Expansion pour couvrir toutes les destinations marocaines majeures",
+      "milestone3": "Construction d'un réseau d'experts et de guides locaux"
     },
     "vision": {
       "title": "Notre Vision",
-      "content": "Nous visons à être la ressource la plus fiable pour les voyageurs planifiant leur aventure marocaine, offrant des guides détaillés, des aperçus culturels et des conseils pratiques pour explorer Tanger, Rabat, Marrakech, Casablanca et Fès."
+      "quote": "Être la source la plus fiable pour des expériences de voyage authentiques au Maroc, connectant les voyageurs au cœur et à l'âme de ce beau pays.",
+      "content": "Nous envisageons un avenir où chaque voyageur au Maroc peut découvrir la riche culture et la beauté naturelle du pays de manière significative et durable.",
+      "goal1": {
+        "title": "Préservation Culturelle",
+        "description": "Soutenir les traditions et les communautés locales tout en les partageant avec le monde"
+      },
+      "goal2": {
+        "title": "Tourisme Durable",
+        "description": "Promouvoir des pratiques de voyage responsables qui profitent aux visiteurs et aux locaux"
+      }
     },
     "expertise": {
       "title": "Notre Expertise",
-      "content": "Notre équipe se compose d'écrivains de voyage expérimentés, de photographes et de guides locaux qui possèdent une vaste connaissance du paysage touristique marocain. Nous mettons régulièrement à jour notre contenu pour fournir les informations les plus récentes et précises."
+      "content": "Notre équipe réunit une expertise diverse en rédaction de voyage, photographie et connaissances locales pour créer des guides complets qui capturent le véritable esprit du Maroc.",
+      "writers": {
+        "title": "Rédacteurs de Voyage",
+        "description": "Des écrivains expérimentés qui donnent vie aux destinations à travers des récits captivants"
+      },
+      "photographers": {
+        "title": "Photographes",
+        "description": "Des photographes talentueux qui capturent la beauté des paysages et de la culture marocaine"
+      },
+      "guides": {
+        "title": "Guides Locaux",
+        "description": "Des locaux compétents qui fournissent des conseils et recommandations authentiques"
+      }
+    },
+    "testimonials": {
+      "title": "Ce Que Disent Nos Lecteurs",
+      "testimonial1": {
+        "name": "Sarah Johnson",
+        "role": "Passionnée de Voyage",
+        "content": "Les guides détaillés m'ont aidée à découvrir des joyaux cachés à Marrakech que je n'aurais jamais trouvés seule. De véritables expériences authentiques !"
+      },
+      "testimonial2": {
+        "name": "Mohammed Alami",
+        "role": "Guide Local",
+        "content": "En tant que guide local, j'apprécie la précision avec laquelle cette plateforme représente notre culture et nos traditions. C'est une ressource précieuse pour les touristes et les locaux."
+      }
+    },
+    "cta": {
+      "title": "Commencez Votre Aventure Marocaine",
+      "description": "Rejoignez notre communauté de voyageurs et découvrez la magie du Maroc à travers nos guides experts et nos conseils d'initiés.",
+      "explore": "Explorer les Destinations",
+      "contact": "Contactez-Nous"
     }
   },
   "blog": {
     "title": "Blog",
     "description": "Derniers articles sur le tourisme au Maroc",
     "categories": "Catégories",
+    "featuredCategories": "Catégories en Vedette",
+    "allCategories": "Toutes les Catégories",
     "readMore": "Lire la Suite",
     "featured": "Articles en Vedette",
     "latest": "Derniers Articles",
-    "popular": "Articles Populaires"
+    "popular": "Articles Populaires",
+    "posts": "articles",
+    "searchPlaceholder": "Rechercher des articles...",
+    "sort": {
+      "newest": "Plus Récent",
+      "oldest": "Plus Ancien",
+      "popular": "Plus Populaire"
+    },
+    "pagination": {
+      "previous": "Précédent",
+      "next": "Suivant"
+    },
+    "noResults": {
+      "title": "Aucun Article Trouvé",
+      "description": "Essayez d'ajuster votre recherche ou vos filtres pour trouver ce que vous cherchez."
+    },
+    "newsletter": {
+      "title": "Rejoignez Notre Communauté de Voyageurs",
+      "description": "Abonnez-vous à notre newsletter pour recevoir les derniers guides de voyage, conseils et actualités sur le Maroc.",
+      "placeholder": "Entrez votre adresse e-mail",
+      "subscribe": "S'abonner",
+      "subscribing": "Abonnement en cours...",
+      "success": "Merci de votre abonnement !",
+      "error": "Une erreur s'est produite. Veuillez réessayer."
+    }
   },
   "contact": {
     "title": "Contactez-nous",
-    "description": "Contactez-nous pour toute question sur le tourisme marocain",
+    "description": "Contactez-nous pour toute question concernant votre aventure marocaine",
     "form": {
       "title": "Envoyez-nous un Message",
       "name": "Votre Nom",
       "email": "Votre Email",
+      "subject": "Sujet",
       "message": "Votre Message",
-      "submit": "Envoyer le Message"
+      "submit": "Envoyer le Message",
+      "sending": "Envoi en cours...",
+      "success": "Merci pour votre message ! Nous vous répondrons bientôt.",
+      "error": "Désolé, une erreur s'est produite lors de l'envoi de votre message. Veuillez réessayer."
     },
     "info": {
       "title": "Informations de Contact",
-      "email": "Email",
-      "phone": "Téléphone",
-      "social": "Réseaux Sociaux"
+      "address": {
+        "title": "Notre Adresse",
+        "content": "123 Rue du Tourisme, Marrakech, Maroc"
+      },
+      "email": {
+        "title": "Email",
+        "content": "contact@moroccantourism.com"
+      },
+      "phone": {
+        "title": "Téléphone",
+        "content": "+212 5XX-XXXXXX"
+      }
+    },
+    "map": {
+      "title": "Trouvez-nous sur la Carte"
     }
   }
 } 

@@ -38,52 +38,148 @@
     "newsletter": "Newsletter Signup",
     "emailPlaceholder": "Enter your email",
     "subscribe": "Subscribe",
-    "copyright": "© 2025 Moroccan Tourism Blog. All Rights Reserved."
+    "copyright": "© 2025 Moroccan Tourism Blog. All Rights Reserved.",
+    "about": "Discover the beauty and culture of Morocco through our comprehensive travel guides and insights.",
+    "quickLinks": "Quick Links",
+    "destinations": "Popular Destinations",
+    "newsletterDescription": "Subscribe to our newsletter for the latest travel guides, tips, and updates about Morocco.",
+    "sitemap": "Sitemap"
   },
   "about": {
     "title": "About Us",
-    "description": "Learn more about our mission to promote Moroccan tourism",
+    "subtitle": "Discover the rich culture and beauty of Morocco through our expert travel guides",
     "introduction": {
       "title": "Our Mission",
-      "content": "We are dedicated to showcasing the rich cultural heritage and diverse attractions of Morocco's most beautiful cities. Our goal is to provide travelers with authentic insights and practical information to make their Moroccan journey unforgettable."
+      "content": "We are dedicated to showcasing the authentic beauty of Morocco, from its vibrant cities to its serene landscapes. Our mission is to provide travelers with comprehensive, insider knowledge that goes beyond the typical tourist experience.",
+      "values": {
+        "authenticity": "Authentic local experiences",
+        "expertise": "Expert travel guidance",
+        "community": "Strong local connections"
+      },
+      "cta": "Explore Our Blog"
     },
     "story": {
       "title": "Our Story",
-      "content": "Founded by passionate travelers and local experts, our blog combines insider knowledge with professional travel writing to bring you the most comprehensive guide to Moroccan tourism."
+      "content": "Founded by passionate travelers and local experts, our journey began with a simple idea: to share the true essence of Morocco with the world. Through years of exploration and connection with local communities, we've built a platform that bridges cultures and creates meaningful travel experiences.",
+      "milestone1": "Started as a small travel blog in 2020",
+      "milestone2": "Expanded to cover all major Moroccan destinations",
+      "milestone3": "Built a network of local experts and guides"
     },
     "vision": {
       "title": "Our Vision",
-      "content": "We aim to be the most trusted resource for travelers planning their Moroccan adventure, offering detailed guides, cultural insights, and practical tips for exploring Tangier, Rabat, Marrakech, Casablanca, and Fez."
+      "quote": "To be the most trusted source for authentic Moroccan travel experiences, connecting travelers with the heart and soul of this beautiful country.",
+      "content": "We envision a future where every traveler to Morocco can experience the country's rich culture and natural beauty in a meaningful, sustainable way.",
+      "goal1": {
+        "title": "Cultural Preservation",
+        "description": "Supporting local traditions and communities while sharing them with the world"
+      },
+      "goal2": {
+        "title": "Sustainable Tourism",
+        "description": "Promoting responsible travel practices that benefit both visitors and locals"
+      }
     },
     "expertise": {
       "title": "Our Expertise",
-      "content": "Our team consists of experienced travel writers, photographers, and local guides who have extensive knowledge of Morocco's tourism landscape. We regularly update our content to provide the most current and accurate information."
+      "content": "Our team brings together diverse expertise in travel writing, photography, and local knowledge to create comprehensive guides that capture the true spirit of Morocco.",
+      "writers": {
+        "title": "Travel Writers",
+        "description": "Experienced writers who bring destinations to life through engaging storytelling"
+      },
+      "photographers": {
+        "title": "Photographers",
+        "description": "Talented photographers who capture the beauty of Morocco's landscapes and culture"
+      },
+      "guides": {
+        "title": "Local Guides",
+        "description": "Knowledgeable locals who provide authentic insights and recommendations"
+      }
+    },
+    "testimonials": {
+      "title": "What Our Readers Say",
+      "testimonial1": {
+        "name": "Sarah Johnson",
+        "role": "Travel Enthusiast",
+        "content": "The detailed guides helped me discover hidden gems in Marrakech that I would have never found on my own. Truly authentic experiences!"
+      },
+      "testimonial2": {
+        "name": "Mohammed Alami",
+        "role": "Local Tour Guide",
+        "content": "As a local guide, I appreciate how accurately this platform represents our culture and traditions. It's a valuable resource for both tourists and locals."
+      }
+    },
+    "cta": {
+      "title": "Start Your Moroccan Adventure",
+      "description": "Join our community of travelers and discover the magic of Morocco through our expert guides and insider tips.",
+      "explore": "Explore Destinations",
+      "contact": "Contact Us"
     }
   },
   "blog": {
     "title": "Blog",
     "description": "Latest articles about tourism in Morocco",
     "categories": "Categories",
+    "featuredCategories": "Featured Categories",
+    "allCategories": "All Categories",
     "readMore": "Read More",
     "featured": "Featured Posts",
     "latest": "Latest Posts",
-    "popular": "Popular Posts"
+    "popular": "Popular Posts",
+    "posts": "posts",
+    "searchPlaceholder": "Search articles...",
+    "sort": {
+      "newest": "Newest First",
+      "oldest": "Oldest First",
+      "popular": "Most Popular"
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "noResults": {
+      "title": "No Posts Found",
+      "description": "Try adjusting your search or filter to find what you're looking for."
+    },
+    "newsletter": {
+      "title": "Join Our Travel Community",
+      "description": "Subscribe to our newsletter for the latest travel guides, tips, and updates about Morocco.",
+      "placeholder": "Enter your email address",
+      "subscribe": "Subscribe",
+      "subscribing": "Subscribing...",
+      "success": "Thank you for subscribing!",
+      "error": "Something went wrong. Please try again."
+    }
   },
   "contact": {
     "title": "Contact Us",
-    "description": "Get in touch with us for any inquiries about Moroccan tourism",
+    "description": "Get in touch with us for any questions about your Moroccan adventure",
     "form": {
       "title": "Send us a Message",
       "name": "Your Name",
       "email": "Your Email",
+      "subject": "Subject",
       "message": "Your Message",
-      "submit": "Send Message"
+      "submit": "Send Message",
+      "sending": "Sending...",
+      "success": "Thank you for your message! We'll get back to you soon.",
+      "error": "Sorry, there was an error sending your message. Please try again."
     },
     "info": {
       "title": "Contact Information",
-      "email": "Email",
-      "phone": "Phone",
-      "social": "Social Media"
+      "address": {
+        "title": "Our Location",
+        "content": "123 Tourism Street, Marrakech, Morocco"
+      },
+      "email": {
+        "title": "Email Us",
+        "content": "contact@moroccantourism.com"
+      },
+      "phone": {
+        "title": "Call Us",
+        "content": "+212 5XX-XXXXXX"
+      }
+    },
+    "map": {
+      "title": "Find Us on the Map"
     }
   }
 } 
