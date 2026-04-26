@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #e8eaef;
+        --sheet: #ffffff;
+        --border: #e2e5eb;
+        --text: #1a1d26;
+        --muted: #5c6370;
+        --accent: #1e3a5f;
+        --accent-hover: #152d4a;
+        --secondary: #f0f2f6;
+        --danger: #b42318;
+        --radius: 12px;
+        --shadow: 0 4px 24px rgba(26, 29, 38, 0.08), 0 1px 3px rgba(26, 29, 38, 0.06);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+        font-size: 14px;
+        color: var(--text);
+        background: var(--bg);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .shell {
+        min-height: 100%;
+        padding: 16px;
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+      }
+
+      /* Feuille / panneau type “sheet” */
+      .sheet {
+        width: 100%;
+        max-width: 640px;
+        margin: 0 auto;
+        background: var(--sheet);
+        border-radius: var(--radius);
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        max-height: 100%;
+      }
+
+      .sheet-header {
+        padding: 18px 20px 14px;
+        border-bottom: 1px solid var(--border);
+        background: linear-gradient(180deg, #fafbfd 0%, var(--sheet) 100%);
+        flex-shrink: 0;
+      }
+
+      .sheet-title {
+        margin: 0 0 4px;
+        font-size: 1.125rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--text);
+      }
+
+      .sheet-sub {
+        margin: 0;
+        font-size: 0.8125rem;
+        color: var(--muted);
+        font-weight: 400;
+      }
+
+      .mode-bar {
+        display: flex;
+        gap: 8px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .seg {
+        display: inline-flex;
+        padding: 3px;
+        background: var(--secondary);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+
+      .seg button {
+        border: none;
+        background: transparent;
+        padding: 8px 14px;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        font-family: inherit;
+        color: var(--muted);
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+      }
+
+      .seg button:hover {
+        color: var(--text);
+      }
+
+      .seg button.active {
+        background: var(--sheet);
+        color: var(--accent);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+      }
+
+      .btn-ghost {
+        padding: 8px 12px;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        font-family: inherit;
+        color: var(--accent);
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .btn-ghost:hover {
+        background: var(--secondary);
+      }
+
+      .modify-panel {
+        display: none;
+        margin-top: 12px;
+        padding: 12px;
+        background: var(--secondary);
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+
+      .modify-panel.visible {
+        display: block;
+      }
+
+      .modify-row {
+        display: flex;
+        gap: 8px;
+        align-items: stretch;
+      }
+
+      .modify-row input {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .sheet-body {
+        padding: 16px 20px 20px;
+        overflow-y: auto;
+        flex: 1;
+        min-height: 0;
+      }
+
+      .field-grid {
+        display: grid;
+        gap: 14px;
+      }
+
+      @media (min-width: 520px) {
+        .field-grid.two {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="datetime-local"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 0.875rem;
+        font-family: inherit;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: #fff;
+        color: var(--text);
+        transition: border-color 0.15s, box-shadow 0.15s;
+      }
+
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(30, 58, 95, 0.12);
+      }
+
+      input:disabled,
+      select:disabled {
+        background: var(--secondary);
+        color: var(--muted);
+        cursor: not-allowed;
+      }
+
+      textarea {
+        min-height: 72px;
+        resize: vertical;
+      }
+
+      .hint {
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+
+      .footer {
+        padding: 14px 20px 18px;
+        border-top: 1px solid var(--border);
+        background: #fafbfd;
+        display: flex;
+        gap: 10px;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        flex-shrink: 0;
+      }
+
+      .btn-primary {
+        padding: 10px 20px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-family: inherit;
+        color: #fff;
+        background: var(--accent);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+
+      .btn-primary:hover {
+        background: var(--accent-hover);
+      }
+
+      .btn-primary:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+      }
+
+      .btn-secondary {
+        padding: 10px 16px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        font-family: inherit;
+        color: var(--text);
+        background: var(--sheet);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .btn-secondary:hover {
+        background: var(--secondary);
+      }
+
+      .msg {
+        font-size: 0.8125rem;
+        margin-top: 8px;
+        padding: 8px 10px;
+        border-radius: 6px;
+        display: none;
+      }
+
+      .msg.error {
+        display: block;
+        background: #fef2f2;
+        color: var(--danger);
+        border: 1px solid #fecaca;
+      }
+
+      .msg.ok {
+        display: block;
+        background: #ecfdf3;
+        color: #027a48;
+        border: 1px solid #abefc6;
+      }
+
+      .loading {
+        opacity: 0.65;
+        pointer-events: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <div class="sheet" id="sheet">
+        <header class="sheet-header">
+          <h1 class="sheet-title">Die Centre Management</h1>
+          <p class="sheet-sub">Enregistrement et suivi des interventions maintenance</p>
+          <div class="mode-bar">
+            <div class="seg" role="tablist" aria-label="Mode">
+              <button type="button" id="mode-new" class="active" data-mode="new">Nouveau ticket</button>
+              <button type="button" id="mode-edit" data-mode="edit">Modifier</button>
+            </div>
+          </div>
+          <div class="modify-panel" id="modify-panel" aria-hidden="true">
+            <label for="load-ref">Référence du ticket</label>
+            <div class="modify-row">
+              <input type="text" id="load-ref" placeholder="Ex. DC-2024-0142" autocomplete="off" />
+              <button type="button" class="btn-primary" id="btn-load" style="white-space: nowrap">Charger</button>
+            </div>
+            <p class="hint">Saisissez la référence enregistrée en colonne D, puis chargez pour éditer la ligne.</p>
+            <div class="msg error" id="load-msg"></div>
+          </div>
+        </header>
+
+        <div class="sheet-body">
+          <form id="ticket-form" novalidate>
+            <div class="field-grid two">
+              <div>
+                <label for="reference">Référence</label>
+                <input type="text" id="reference" name="reference" required placeholder="Référence unique" />
+              </div>
+              <div>
+                <label for="dateHeure">Date et heure</label>
+                <input type="datetime-local" id="dateHeure" name="dateHeure" />
+              </div>
+            </div>
+            <div class="field-grid two" style="margin-top: 14px">
+              <div>
+                <label for="technicien">Technicien</label>
+                <select id="technicien" name="technicien"></select>
+              </div>
+              <div>
+                <label for="shift">Équipe / shift</label>
+                <select id="shift" name="shift"></select>
+              </div>
+            </div>
+            <div class="field-grid two" style="margin-top: 14px">
+              <div>
+                <label for="typeEquipement">Type d’équipement</label>
+                <select id="typeEquipement" name="typeEquipement"></select>
+              </div>
+              <div>
+                <label for="typeAction">Type d’action</label>
+                <select id="typeAction" name="typeAction"></select>
+              </div>
+            </div>
+            <div class="field-grid two" style="margin-top: 14px">
+              <div>
+                <label for="duree">Durée (h)</label>
+                <input type="number" id="duree" name="duree" min="0" step="0.25" value="0" />
+              </div>
+              <div>
+                <label for="statut">Statut</label>
+                <select id="statut" name="statut"></select>
+              </div>
+            </div>
+          </form>
+          <div class="msg error" id="form-msg"></div>
+        </div>
+
+        <footer class="footer">
+          <button type="button" class="btn-secondary" id="btn-reset">Réinitialiser</button>
+          <button type="button" class="btn-primary" id="btn-submit">Enregistrer</button>
+        </footer>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var state = { mode: "new", options: null, loadedRef: null };
+
+        var els = {
+          modeNew: document.getElementById("mode-new"),
+          modeEdit: document.getElementById("mode-edit"),
+          modifyPanel: document.getElementById("modify-panel"),
+          loadRef: document.getElementById("load-ref"),
+          btnLoad: document.getElementById("btn-load"),
+          loadMsg: document.getElementById("load-msg"),
+          form: document.getElementById("ticket-form"),
+          formMsg: document.getElementById("form-msg"),
+          btnSubmit: document.getElementById("btn-submit"),
+          btnReset: document.getElementById("btn-reset"),
+          reference: document.getElementById("reference"),
+          dateHeure: document.getElementById("dateHeure"),
+          technicien: document.getElementById("technicien"),
+          shift: document.getElementById("shift"),
+          typeEquipement: document.getElementById("typeEquipement"),
+          typeAction: document.getElementById("typeAction"),
+          duree: document.getElementById("duree"),
+          statut: document.getElementById("statut"),
+          sheet: document.getElementById("sheet")
+        };
+
+        function clearMsgs() {
+          els.loadMsg.className = "msg error";
+          els.loadMsg.style.display = "none";
+          els.loadMsg.textContent = "";
+          els.formMsg.className = "msg error";
+          els.formMsg.style.display = "none";
+          els.formMsg.textContent = "";
+        }
+
+        function showLoadError(text) {
+          els.loadMsg.textContent = text;
+          els.loadMsg.className = "msg error";
+          els.loadMsg.style.display = "block";
+        }
+
+        function showFormError(text) {
+          els.formMsg.textContent = text;
+          els.formMsg.className = "msg error";
+          els.formMsg.style.display = "block";
+        }
+
+        function showFormOk(text) {
+          els.formMsg.textContent = text;
+          els.formMsg.className = "msg ok";
+          els.formMsg.style.display = "block";
+        }
+
+        function fillSelect(select, list, placeholder) {
+          select.innerHTML = "";
+          if (placeholder) {
+            var o = document.createElement("option");
+            o.value = "";
+            o.textContent = placeholder;
+            select.appendChild(o);
+          }
+          (list || []).forEach(function (item) {
+            var opt = document.createElement("option");
+            opt.value = item;
+            opt.textContent = item;
+            select.appendChild(opt);
+          });
+        }
+
+        function applyOptions(opt) {
+          state.options = opt;
+          fillSelect(els.technicien, opt.techniciens, "— Choisir —");
+          fillSelect(els.shift, opt.shifts, false);
+          fillSelect(els.typeEquipement, opt.equipTypes, false);
+          fillSelect(els.typeAction, opt.actionTypes, false);
+          fillSelect(els.statut, opt.status, false);
+        }
+
+        function pad(n) {
+          return n < 10 ? "0" + n : String(n);
+        }
+
+        function toDatetimeLocalValue(d) {
+          return (
+            d.getFullYear() +
+            "-" +
+            pad(d.getMonth() + 1) +
+            "-" +
+            pad(d.getDate()) +
+            "T" +
+            pad(d.getHours()) +
+            ":" +
+            pad(d.getMinutes())
+          );
+        }
+
+        function parseSheetsDate(str) {
+          if (!str) return null;
+          var s = String(str).trim();
+          if (!s) return null;
+          var d = new Date(s);
+          if (!isNaN(d.getTime())) return d;
+          return null;
+        }
+
+        function setFormFromPayload(p) {
+          els.reference.value = p.reference || "";
+          els.reference.disabled = state.mode === "edit";
+          var dh = p.dateHeure;
+          var parsed = parseSheetsDate(dh);
+          if (parsed) els.dateHeure.value = toDatetimeLocalValue(parsed);
+          else if (/^\d{4}-\d{2}-\d{2}T/.test(dh)) els.dateHeure.value = dh.slice(0, 16);
+          else els.dateHeure.value = "";
+
+          els.technicien.value = p.technicien || "";
+          els.shift.value = p.shift || "";
+          els.typeEquipement.value = p.typeEquipement || "";
+          els.typeAction.value = p.typeAction || "";
+          els.duree.value = p.duree != null ? p.duree : 0;
+          els.statut.value = p.statut || "";
+        }
+
+        function emptyFormForNew() {
+          state.mode = "new";
+          state.loadedRef = null;
+          els.modeNew.classList.add("active");
+          els.modeEdit.classList.remove("active");
+          els.modifyPanel.classList.remove("visible");
+          els.modifyPanel.setAttribute("aria-hidden", "true");
+          els.reference.disabled = false;
+          els.loadRef.value = "";
+          els.reference.value = "";
+          els.dateHeure.value = toDatetimeLocalValue(new Date());
+          if (state.options) {
+            els.technicien.value = "";
+            els.shift.selectedIndex = 0;
+            els.typeEquipement.selectedIndex = 0;
+            els.typeAction.selectedIndex = 0;
+            els.statut.selectedIndex = 0;
+          }
+          els.duree.value = "0";
+          els.btnSubmit.textContent = "Enregistrer";
+          clearMsgs();
+        }
+
+        function enterEditMode() {
+          state.mode = "edit";
+          els.modeNew.classList.remove("active");
+          els.modeEdit.classList.add("active");
+          els.modifyPanel.classList.add("visible");
+          els.modifyPanel.setAttribute("aria-hidden", "false");
+          els.reference.disabled = true;
+          els.btnSubmit.textContent = "Mettre à jour";
+          clearMsgs();
+        }
+
+        function setLoading(on) {
+          if (on) els.sheet.classList.add("loading");
+          else els.sheet.classList.remove("loading");
+          els.btnLoad.disabled = on;
+          els.btnSubmit.disabled = on;
+        }
+
+        function getPayload() {
+          return {
+            reference: els.reference.value.trim(),
+            dateHeure: els.dateHeure.value || "",
+            technicien: els.technicien.value,
+            shift: els.shift.value,
+            typeEquipement: els.typeEquipement.value,
+            typeAction: els.typeAction.value,
+            duree: els.duree.value,
+            statut: els.statut.value
+          };
+        }
+
+        els.modeNew.addEventListener("click", function () {
+          emptyFormForNew();
+        });
+
+        els.modeEdit.addEventListener("click", function () {
+          enterEditMode();
+        });
+
+        els.btnLoad.addEventListener("click", function () {
+          clearMsgs();
+          var ref = els.loadRef.value.trim();
+          if (!ref) {
+            showLoadError("Indiquez une référence.");
+            return;
+          }
+          setLoading(true);
+          google.script.run
+            .withSuccessHandler(function (payload) {
+              setLoading(false);
+              if (!payload) {
+                showLoadError("Aucun ticket trouvé pour cette référence.");
+                return;
+              }
+              state.loadedRef = ref;
+              setFormFromPayload(payload);
+              showFormOk("Ticket chargé. Modifiez les champs puis cliquez sur Mettre à jour.");
+            })
+            .withFailureHandler(function (err) {
+              setLoading(false);
+              showLoadError(err.message || String(err));
+            })
+            .getTicketByReference(ref);
+        });
+
+        els.btnSubmit.addEventListener("click", function () {
+          clearMsgs();
+          var p = getPayload();
+          if (!p.reference) {
+            showFormError("La référence est obligatoire.");
+            return;
+          }
+          if (state.mode === "edit" && !state.loadedRef) {
+            showFormError("Chargez d’abord un ticket par sa référence.");
+            return;
+          }
+          setLoading(true);
+          var chain = google.script.run
+            .withSuccessHandler(function () {
+              setLoading(false);
+              if (state.mode === "edit") {
+                showFormOk("Ticket mis à jour.");
+              } else {
+                showFormOk("Ticket enregistré.");
+                emptyFormForNew();
+              }
+            })
+            .withFailureHandler(function (err) {
+              setLoading(false);
+              showFormError(err.message || String(err));
+            });
+          if (state.mode === "edit") chain.updateTicket(p);
+          else chain.saveTicket(p);
+        });
+
+        els.btnReset.addEventListener("click", function () {
+          clearMsgs();
+          if (state.mode === "edit" && state.loadedRef) {
+            setLoading(true);
+            google.script.run
+              .withSuccessHandler(function (payload) {
+                setLoading(false);
+                if (payload) setFormFromPayload(payload);
+              })
+              .withFailureHandler(function () {
+                setLoading(false);
+              })
+              .getTicketByReference(state.loadedRef || els.reference.value.trim());
+          } else {
+            emptyFormForNew();
+          }
+        });
+
+        google.script.run
+          .withSuccessHandler(function (opt) {
+            applyOptions(opt);
+            emptyFormForNew();
+          })
+          .withFailureHandler(function (err) {
+            showFormError(err.message || String(err));
+          })
+          .getOptions();
+      })();
+    </script>
+  </body>
+</html>
