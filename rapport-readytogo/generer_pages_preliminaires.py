@@ -446,7 +446,7 @@ def build_sigles(doc):
 
     caption = doc.add_paragraph()
     set_paragraph_format(caption, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_before=8, space_after=6)
-    run = caption.add_run("Tableau 1 — Liste des sigles et abréviations")
+    run = caption.add_run("Liste des sigles et abréviations utilisés dans le rapport")
     set_run_font(run, size=10, italic=True)
 
 
@@ -470,6 +470,17 @@ def add_toc_entry(doc, title, level=0):
     return p
 
 
+def _add_list_entry(doc, text):
+    entry = doc.add_paragraph()
+    set_paragraph_format(entry, space_after=4, line_spacing=1.15)
+    entry.paragraph_format.tab_stops.add_tab_stop(Cm(16.0), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+    run = entry.add_run(text)
+    set_run_font(run, size=11)
+    run2 = entry.add_run("\t")
+    set_run_font(run2, size=11)
+    return entry
+
+
 def build_listes_tableaux_figures(doc):
     add_page_break(doc)
     add_section_title(doc, "Liste des tableaux")
@@ -477,25 +488,27 @@ def build_listes_tableaux_figures(doc):
     p = doc.add_paragraph()
     set_paragraph_format(p, space_after=8, first_line_indent=0)
     run = p.add_run(
-        "La liste des tableaux sera complétée au fur et à mesure de l’intégration des chapitres "
+        "La liste des tableaux est actualisée au fur et à mesure de l’intégration des chapitres "
         "(légendes professionnelles sous chaque tableau)."
     )
     set_run_font(run, size=12)
 
-    # Première entrée déjà créée
-    entry = doc.add_paragraph()
-    set_paragraph_format(entry, space_after=4, line_spacing=1.15)
-    entry.paragraph_format.tab_stops.add_tab_stop(Cm(16.0), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
-    run = entry.add_run("Tableau 1 — Liste des sigles et abréviations")
-    set_run_font(run, size=11)
-    run2 = entry.add_run("\t")
-    set_run_font(run2, size=11)
+    for item in [
+        "Tableau 1 — Synthèse du concept ReadyToGo",
+        "Tableau 2 — Problèmes identifiés et réponses proposées par ReadyToGo",
+        "Tableau 3 — Objectifs généraux de ReadyToGo",
+        "Tableau 4 — Comparaison entre ReadyToGo et les alternatives de transport",
+        "Tableau 5 — Parcours utilisateur détaillé",
+        "Tableau 6 — Organisation opérationnelle quotidienne",
+        "Tableau 7 — Zones potentielles de déploiement à Tanger",
+    ]:
+        _add_list_entry(doc, item)
 
     note = doc.add_paragraph()
     set_paragraph_format(note, space_before=8, space_after=6)
     run = note.add_run(
-        "[Emplacement : les tableaux suivants (budget, risques, RACI, KPI, etc.) seront ajoutés "
-        "lors de l’intégration des chapitres correspondants.]"
+        "[Les tableaux des chapitres suivants (cadrage, budget, risques, RACI, KPI, etc.) "
+        "seront ajoutés lors de leur intégration.]"
     )
     set_run_font(run, size=10, italic=True, color=RGBColor(0x66, 0x66, 0x66))
 
@@ -505,21 +518,23 @@ def build_listes_tableaux_figures(doc):
     p = doc.add_paragraph()
     set_paragraph_format(p, space_after=8, first_line_indent=0)
     run = p.add_run(
-        "La liste des figures sera complétée au fur et à mesure de l’intégration des chapitres "
+        "La liste des figures est actualisée au fur et à mesure de l’intégration des chapitres "
         "(légendes professionnelles sous chaque figure)."
     )
     set_run_font(run, size=12)
 
-    note = doc.add_paragraph()
-    set_paragraph_format(note, space_before=4, space_after=6)
-    run = note.add_run("Information à compléter")
-    set_run_font(run, size=12, italic=True)
+    for item in [
+        "Figure 1 — Logo conceptuel ReadyToGo (à intégrer)",
+        "Figure 2 — Parcours utilisateur ReadyToGo (à intégrer)",
+        "Figure 3 — Carte conceptuelle des zones pilotes à Tanger (à intégrer)",
+        "Figure 4 — Comparaison visuelle des moyens de transport (à intégrer)",
+    ]:
+        _add_list_entry(doc, item)
 
     note2 = doc.add_paragraph()
     set_paragraph_format(note2, space_before=8, space_after=6)
     run = note2.add_run(
-        "[Emplacements suggérés pour les figures à venir : logo ReadyToGo, carte des zones pilotes "
-        "à Tanger, schéma du concept de service, WBS, roadmap 2026-2030, diagramme de Gantt, "
+        "[Figures ultérieures suggérées : WBS, roadmap 2026-2030, diagramme de Gantt, "
         "réseau PERT, matrice pouvoir/intérêt, matrice de criticité des risques, tableau de bord KPI.]"
     )
     set_run_font(run, size=10, italic=True, color=RGBColor(0x66, 0x66, 0x66))
@@ -551,12 +566,16 @@ def build_sommaire(doc):
     structure = [
         ("Introduction générale", 0),
         ("Chapitre 1 : Présentation générale du projet ReadyToGo", 0),
-        ("1.1. Origine de l’idée", 1),
-        ("1.2. Présentation du concept", 1),
-        ("1.3. Problème de mobilité à résoudre", 1),
-        ("1.4. Objectifs du projet", 1),
+        ("1.1. Origine de l’idée du projet", 1),
+        ("1.2. Présentation du concept ReadyToGo", 1),
+        ("1.3. Problème à résoudre", 1),
+        ("1.4. Objectifs généraux du projet", 1),
         ("1.5. Valeur ajoutée du service", 1),
         ("1.6. Identité de marque ReadyToGo", 1),
+        ("1.7. Fonctionnement général du service", 1),
+        ("1.8. Fonctionnement opérationnel quotidien", 1),
+        ("1.9. Justification du choix de Tanger", 1),
+        ("1.10. Conclusion du chapitre", 1),
         ("Chapitre 2 : Cadrage du projet", 0),
         ("2.1. Note de cadrage", 1),
         ("2.2. Problématique", 1),
@@ -748,6 +767,11 @@ def build_introduction(doc):
 
 
 def main():
+    import sys
+
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from chapitre1 import build_chapitre_1
+
     doc = Document()
     configure_styles(doc)
 
@@ -762,6 +786,7 @@ def main():
     build_listes_tableaux_figures(doc)
     build_sommaire(doc)
     build_introduction(doc)
+    build_chapitre_1(doc)
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(OUTPUT))
