@@ -640,25 +640,111 @@ def build_sommaire(doc):
         add_toc_entry(doc, title, level)
 
 
-def add_body_placeholder(doc):
-    """Page de transition avant le corps du rapport (à compléter page par page)."""
+def build_introduction(doc):
+    """Introduction générale — placée après le sommaire."""
     add_page_break(doc)
     heading = doc.add_heading("Introduction générale", level=1)
     for run in heading.runs:
         set_run_font(run, size=16, bold=True, color=RGBColor(0x1F, 0x4E, 0x79))
+    set_paragraph_format(heading, alignment=WD_ALIGN_PARAGRAPH.LEFT, space_before=0, space_after=12)
 
-    p = doc.add_paragraph()
-    set_paragraph_format(p, first_line_indent=0)
-    run = p.add_run("Information à compléter")
-    set_run_font(run, size=12, italic=True)
+    paragraphs = [
+        (
+            "La mobilité urbaine constitue aujourd’hui l’un des enjeux majeurs des grandes villes "
+            "marocaines. Avec l’augmentation du nombre de véhicules, la croissance démographique, "
+            "le développement touristique et l’élargissement des activités économiques, les "
+            "déplacements quotidiens deviennent de plus en plus complexes. La ville de Tanger, "
+            "en raison de sa position stratégique, de son dynamisme économique et de son "
+            "attractivité touristique, connaît une pression croissante sur ses infrastructures "
+            "de transport."
+        ),
+        (
+            "Dans ce contexte, la circulation urbaine représente un défi important pour les "
+            "habitants, les étudiants, les travailleurs, les visiteurs et les touristes. Les "
+            "embouteillages, la difficulté de stationnement, le temps perdu dans les déplacements "
+            "et la saturation de certains axes réduisent la qualité de vie urbaine et peuvent "
+            "freiner l’efficacité des déplacements. Cette situation devient encore plus importante "
+            "dans la perspective de la Coupe du Monde 2030, événement international qui impliquera "
+            "une forte hausse des flux de visiteurs, notamment dans les villes marocaines "
+            "concernées par l’accueil et l’organisation de l’événement."
+        ),
+        (
+            "Le projet ReadyToGo s’inscrit dans cette réflexion. Il propose la mise en place d’un "
+            "service de trottinettes électriques en libre-service à Tanger, afin d’offrir une "
+            "solution de mobilité courte distance, flexible, rapide, accessible et respectueuse "
+            "de l’environnement. L’idée initiale du projet repose sur un constat simple : certains "
+            "trajets urbains, notamment entre le centre-ville, la corniche, la gare, les zones "
+            "hôtelières et les lieux à forte fréquentation, peuvent être réalisés plus efficacement "
+            "avec une solution de micromobilité qu’avec une voiture ou un taxi en période de "
+            "congestion. La fiche initiale du projet met déjà en avant cette logique de "
+            "complémentarité avec les transports existants, notamment le bus, les taxis et les "
+            "infrastructures prévues autour de Tanger."
+        ),
+        (
+            "ReadyToGo ne vise donc pas à remplacer les moyens de transport existants. Il s’agit "
+            "plutôt d’une solution complémentaire destinée à améliorer la fluidité des "
+            "déplacements, particulièrement sur les derniers kilomètres. Le service permettrait "
+            "aux utilisateurs de localiser une trottinette via une application mobile, de la "
+            "déverrouiller à l’aide d’un QR code, d’effectuer leur trajet, puis de la déposer "
+            "dans une zone autorisée. Le fonctionnement quotidien du service repose sur une flotte "
+            "de trottinettes électriques, des bornes ou zones de stationnement, une application "
+            "mobile, une équipe de maintenance, un système de recharge et un tableau de bord de "
+            "suivi opérationnel."
+        ),
+        (
+            "Ce projet présente également une dimension stratégique. Dans la perspective de 2030, "
+            "Tanger devra renforcer son image de ville moderne, accessible et capable d’accueillir "
+            "des flux importants de visiteurs. Un service comme ReadyToGo peut contribuer à cette "
+            "ambition en offrant une expérience de déplacement simple pour les habitants comme "
+            "pour les touristes. Les pass journée, les pass semaine, les tarifs étudiants, la "
+            "signalétique multilingue et les zones connectées aux pôles de transport peuvent "
+            "donner au projet une valeur ajoutée particulière."
+        ),
+        (
+            "Sur le plan académique, ReadyToGo constitue un cas pertinent pour appliquer les "
+            "notions fondamentales du management de projet. En effet, il s’agit d’un projet "
+            "temporaire, avec un début, une fin, des objectifs précis, des contraintes de coût, "
+            "de délai et de qualité, des parties prenantes multiples et des livrables concrets. "
+            "Le support du cours rappelle qu’un projet doit être construit progressivement à "
+            "travers plusieurs étapes : cadrage, planification, gestion des risques, suivi, "
+            "communication et livraison finale."
+        ),
+        (
+            "Le présent rapport a donc pour objectif de présenter ReadyToGo comme un projet "
+            "structuré de management. Il ne se limite pas à décrire une idée commerciale. Il vise "
+            "à montrer comment cette idée peut être transformée en projet réalisable, pilotable "
+            "et évaluable. Pour cela, le rapport abordera successivement la présentation du "
+            "projet, son cadrage, ses objectifs SMART, son périmètre, ses parties prenantes, sa "
+            "méthodologie de gestion, sa planification, son budget, ses risques, ses indicateurs "
+            "de suivi, sa stratégie de communication, ses scénarios d’utilisation et sa clôture."
+        ),
+        (
+            "La démarche retenue est une approche hybride. La partie stratégique du projet, "
+            "notamment le cadrage, les autorisations, le budget, les contrats, l’installation "
+            "des bornes et la gouvernance, nécessite une organisation classique et structurée. "
+            "En revanche, le développement de l’application mobile, les tests utilisateurs, "
+            "l’amélioration du service et l’ajustement des fonctionnalités nécessitent une "
+            "approche agile. Cette combinaison permet de bénéficier à la fois de la rigueur du "
+            "management classique et de la flexibilité des méthodes agiles."
+        ),
+        (
+            "Ainsi, ReadyToGo apparaît comme un projet à la fois urbain, technologique, "
+            "économique et environnemental. Il répond à un besoin concret de mobilité, tout en "
+            "offrant un terrain d’application complet pour les outils de management de projet "
+            "étudiés dans le cadre du cours."
+        ),
+    ]
+    for text in paragraphs:
+        add_body_paragraph(doc, text)
 
+    # Emplacement figure suggéré
     note = doc.add_paragraph()
-    set_paragraph_format(note, space_before=12)
+    set_paragraph_format(note, alignment=WD_ALIGN_PARAGRAPH.CENTER, space_before=16, space_after=4)
     run = note.add_run(
-        "[Le corps du rapport (introduction et chapitres) sera intégré progressivement "
-        "au fur et à mesure de la réception du contenu validé, page par page.]"
+        "[Emplacement suggéré — Figure : schéma de positionnement de ReadyToGo dans "
+        "l’écosystème de mobilité urbaine à Tanger (complémentarité bus / taxis / micromobilité)]"
     )
-    set_run_font(run, size=10, italic=True, color=RGBColor(0x66, 0x66, 0x66))
+    set_run_font(run, size=9, italic=True, color=RGBColor(0x88, 0x88, 0x88))
 
 
 def main():
@@ -675,7 +761,7 @@ def main():
     build_sigles(doc)
     build_listes_tableaux_figures(doc)
     build_sommaire(doc)
-    add_body_placeholder(doc)
+    build_introduction(doc)
 
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(OUTPUT))
