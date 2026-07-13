@@ -47,11 +47,21 @@ pip install -r requirements.txt
 
 ## Lancement
 
+**Important :** lancez l'application depuis le dossier `ML_Library` :
+
 ```bash
+cd ML_Library
 streamlit run app.py
 ```
 
 L'application s'ouvre dans le navigateur (généralement http://localhost:8501).
+
+### Pages disponibles (menu latéral)
+
+1. **ML Academy Library** — page d'accueil premium
+2. **Introduction ML** — fondamentaux du Machine Learning
+3. **KNN** · **Decision Tree** · **SVM** · **PCA** · **LDA**
+4. **Comparaison** — synthèse des performances
 
 ## Fonctionnalités
 
