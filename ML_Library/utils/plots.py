@@ -15,12 +15,12 @@ from sklearn.inspection import DecisionBoundaryDisplay
 import matplotlib.pyplot as plt
 
 
-# Palette cohérente avec le thème sombre premium
-PALETTE = ["#38bdf8", "#22d3ee", "#34d399", "#fbbf24", "#f472b6", "#a78bfa"]
+# Palette — Midnight Observatory (teal / cyan / gold)
+PALETTE = ["#2dd4bf", "#38bdf8", "#e8c47c", "#67e8f9", "#5eead4", "#fbbf24"]
 PLOTLY_LAYOUT = dict(
     paper_bgcolor="rgba(0,0,0,0)",
-    plot_bgcolor="rgba(15, 23, 42, 0.35)",
-    font=dict(family="Outfit, sans-serif", color="#e2e8f0"),
+    plot_bgcolor="rgba(10, 20, 34, 0.45)",
+    font=dict(family="DM Sans, sans-serif", color="#e2e8f0"),
     margin=dict(l=40, r=30, t=50, b=40),
 )
 
@@ -43,7 +43,7 @@ def plot_confusion_matrix(
         text_auto=True,
         x=list(labels),
         y=list(labels),
-        color_continuous_scale=["#0b1220", "#0284c7", "#22d3ee"],
+        color_continuous_scale=["#050a12", "#0d9488", "#67e8f9"],
         aspect="auto",
     )
     fig.update_layout(
@@ -114,8 +114,8 @@ def plot_explained_variance(
             x=components,
             y=ratios,
             name="Variance individuelle",
-            marker_color="#38bdf8",
-            opacity=0.85,
+            marker_color="#2dd4bf",
+            opacity=0.9,
         ),
         secondary_y=False,
     )
@@ -125,7 +125,7 @@ def plot_explained_variance(
             y=cumulative,
             name="Variance cumulée",
             mode="lines+markers",
-            line=dict(color="#34d399", width=3),
+            line=dict(color="#e8c47c", width=3),
             marker=dict(size=9),
         ),
         secondary_y=True,
@@ -205,14 +205,14 @@ def plot_decision_boundary_2d(
     Frontière de décision 2D via Matplotlib (compatible Streamlit).
     Retourne une figure matplotlib.
     """
-    fig, ax = plt.subplots(figsize=(7, 5), facecolor="#0b1220")
-    ax.set_facecolor("#0f172a")
+    fig, ax = plt.subplots(figsize=(7, 5), facecolor="#050a12")
+    ax.set_facecolor("#0a1422")
 
     DecisionBoundaryDisplay.from_estimator(
         model,
         X,
         response_method="predict",
-        cmap="cool",
+        cmap="ocean",
         alpha=0.35,
         ax=ax,
     )
@@ -225,12 +225,12 @@ def plot_decision_boundary_2d(
         linewidths=0.6,
         s=45,
     )
-    ax.set_xlabel(feature_names[0], color="#94a3b8")
-    ax.set_ylabel(feature_names[1], color="#94a3b8")
-    ax.set_title(title, color="#f8fafc", fontsize=13, pad=12)
-    ax.tick_params(colors="#94a3b8")
+    ax.set_xlabel(feature_names[0], color="#a8b6c8")
+    ax.set_ylabel(feature_names[1], color="#a8b6c8")
+    ax.set_title(title, color="#f1f5f9", fontsize=13, pad=12)
+    ax.tick_params(colors="#a8b6c8")
     for spine in ax.spines.values():
-        spine.set_color("#334155")
+        spine.set_color("#1e3a4a")
     fig.colorbar(scatter, ax=ax, fraction=0.046, pad=0.04)
     fig.tight_layout()
     return fig
@@ -249,7 +249,7 @@ def plot_feature_importance_tree(
         y="Feature",
         orientation="h",
         color="Importance",
-        color_continuous_scale=["#0ea5e9", "#22d3ee"],
+        color_continuous_scale=["#0a1422", "#2dd4bf", "#e8c47c"],
     )
     fig.update_layout(coloraxis_showscale=False)
     return _apply_layout(fig, title)
@@ -259,8 +259,8 @@ def plot_tree_matplotlib(model, feature_names, class_names):
     """Visualisation de l'arbre de décision (matplotlib)."""
     from sklearn.tree import plot_tree
 
-    fig, ax = plt.subplots(figsize=(14, 8), facecolor="#0b1220")
-    ax.set_facecolor("#0b1220")
+    fig, ax = plt.subplots(figsize=(14, 8), facecolor="#050a12")
+    ax.set_facecolor("#050a12")
     plot_tree(
         model,
         feature_names=feature_names,
@@ -271,6 +271,6 @@ def plot_tree_matplotlib(model, feature_names, class_names):
         ax=ax,
         impurity=True,
     )
-    ax.set_title("Arbre de décision", color="#f8fafc", fontsize=14, pad=12)
+    ax.set_title("Arbre de décision", color="#f1f5f9", fontsize=14, pad=12)
     fig.tight_layout()
     return fig
