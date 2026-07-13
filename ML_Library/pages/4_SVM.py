@@ -12,22 +12,16 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from utils.style import (
-    inject_custom_css,
     hero,
     section_header,
     info_box,
     formula_box,
     footer,
-    page_config,
-    sidebar_brand,
 )
 from utils.data_loader import load_iris_data, split_data, standardize, make_2d_classification
 from utils.model_utils import train_svm, evaluate_classifier
 from utils.plots import plot_confusion_matrix, plot_decision_boundary_2d
 
-page_config("SVM · ML Academy")
-inject_custom_css()
-sidebar_brand()
 
 hero(
     title="Support Vector Machine (SVM)",

@@ -13,19 +13,13 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from utils.style import (
-    inject_custom_css,
     hero,
     section_header,
     info_box,
     glass_card_html,
     footer,
-    page_config,
-    sidebar_brand,
 )
 
-page_config("Accueil · ML Academy")
-inject_custom_css()
-sidebar_brand()
 
 hero(
     title="Introduction au Machine Learning",

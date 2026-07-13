@@ -12,14 +12,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from utils.style import (
-    inject_custom_css,
     hero,
     section_header,
     info_box,
     formula_box,
     footer,
-    page_config,
-    sidebar_brand,
 )
 from utils.data_loader import load_iris_data, split_data, standardize
 from utils.model_utils import train_knn, evaluate_classifier
@@ -28,9 +25,6 @@ from utils.plots import (
     plot_iris_scatter,
 )
 
-page_config("KNN · ML Academy")
-inject_custom_css()
-sidebar_brand()
 
 hero(
     title="K-Nearest Neighbors (KNN)",

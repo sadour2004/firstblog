@@ -14,23 +14,17 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from utils.style import (
-    inject_custom_css,
     hero,
     section_header,
     info_box,
     formula_box,
     footer,
-    page_config,
-    sidebar_brand,
 )
 from utils.data_loader import load_iris_data
 from utils.model_utils import train_pca
 from utils.plots import plot_pca_2d, plot_explained_variance, plot_iris_scatter
 from sklearn.preprocessing import StandardScaler
 
-page_config("PCA · ML Academy")
-inject_custom_css()
-sidebar_brand()
 
 hero(
     title="PCA — Analyse en Composantes Principales",

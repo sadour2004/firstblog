@@ -12,14 +12,11 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from utils.style import (
-    inject_custom_css,
     hero,
     section_header,
     info_box,
     formula_box,
     footer,
-    page_config,
-    sidebar_brand,
 )
 from utils.data_loader import load_iris_data, split_data
 from utils.model_utils import train_decision_tree, evaluate_classifier
@@ -29,9 +26,6 @@ from utils.plots import (
     plot_tree_matplotlib,
 )
 
-page_config("Decision Tree · ML Academy")
-inject_custom_css()
-sidebar_brand()
 
 hero(
     title="Decision Tree",

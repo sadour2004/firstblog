@@ -14,13 +14,10 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from utils.style import (
-    inject_custom_css,
     hero,
     section_header,
     info_box,
     footer,
-    page_config,
-    sidebar_brand,
 )
 from utils.data_loader import load_iris_data, split_data, standardize
 from utils.model_utils import (
@@ -33,9 +30,6 @@ from utils.model_utils import (
 from utils.plots import plot_metrics_comparison, plot_confusion_matrix
 from utils.model_utils import evaluate_classifier
 
-page_config("Comparaison · ML Academy")
-inject_custom_css()
-sidebar_brand()
 
 hero(
     title="Comparaison des algorithmes",
