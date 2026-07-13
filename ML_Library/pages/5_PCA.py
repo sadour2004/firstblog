@@ -19,6 +19,9 @@ from utils.style import (
     info_box,
     formula_box,
     footer,
+    metric_card,
+    panel_header,
+    plot_header,
 )
 from utils.data_loader import load_iris_data
 from utils.model_utils import train_pca
@@ -161,8 +164,10 @@ with tab_theory:
 # CODE
 # ===========================================================================
 with tab_code:
-    section_header("Implémentation Scikit-Learn", "PCA 2D sur Iris")
-    st.code(
+    section_header("Implémentation Scikit-Learn", "PCA 2D sur Iris", label="Code")
+    with st.container(border=True):
+        panel_header("📄 Script Python", "Standardisation + PCA")
+        st.code(
         '''from sklearn.datasets import load_iris
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
@@ -194,69 +199,69 @@ plt.show()
 # ===========================================================================
 with tab_demo:
     section_header(
-        "Démonstration interactive — Dataset Iris",
+        "Démonstration interactive",
         "Standardisation → PCA → visualisation 2D & variance expliquée.",
+        label="Live demo",
     )
 
     X, y, feature_names, target_names, df = load_iris_data()
 
-    n_components = st.slider("Nombre de composantes", 2, 4, 2)
+    with st.container(border=True):
+        panel_header("⚙️ Paramètres PCA", "Nombre de composantes principales")
+        n_components = st.slider("Nombre de composantes", 2, 4, 2)
 
     scaler = StandardScaler()
     X_scaled = scaler.fit_transform(X)
-
     pca, X_pca = train_pca(X_scaled, n_components=n_components)
     ratios = pca.explained_variance_ratio_
 
+    section_header("Variance expliquée", "Information conservée par composante", label="Résultats")
     m1, m2, m3 = st.columns(3)
-    m1.metric("PC1 — variance", f"{ratios[0]*100:.1f}%")
-    m2.metric("PC2 — variance", f"{ratios[1]*100:.1f}%")
-    m3.metric("Variance cumulée", f"{ratios.sum()*100:.1f}%")
+    with m1:
+        metric_card("PC1 — variance", f"{ratios[0]*100:.1f}%", "📉")
+    with m2:
+        metric_card("PC2 — variance", f"{ratios[1]*100:.1f}%", "📉")
+    with m3:
+        metric_card("Variance cumulée", f"{ratios.sum()*100:.1f}%", "✨")
 
-    c_left, c_right = st.columns(2)
+    c_left, c_right = st.columns(2, gap="medium")
     with c_left:
-        fig_pca = plot_pca_2d(
-            X_pca[:, :2],
-            y,
-            target_names,
-            explained_variance=ratios,
-            title="Projection PCA (2D)",
-        )
-        st.plotly_chart(fig_pca, width='stretch')
+        with st.container(border=True):
+            plot_header("Projection PCA (2D)", "Espace réduit des composantes principales")
+            fig_pca = plot_pca_2d(
+                X_pca[:, :2], y, target_names,
+                explained_variance=ratios, title="Projection PCA (2D)",
+            )
+            st.plotly_chart(fig_pca, width="stretch")
     with c_right:
-        fig_var = plot_explained_variance(
-            ratios, title="Variance expliquée par composante"
+        with st.container(border=True):
+            plot_header("Variance par composante", "Individuelle et cumulée")
+            fig_var = plot_explained_variance(ratios, title="Variance expliquée par composante")
+            st.plotly_chart(fig_var, width="stretch")
+
+    with st.container(border=True):
+        plot_header("Espace original", "2 features Iris pour comparaison")
+        fig_orig = plot_iris_scatter(
+            df, x="petal length (cm)", y="petal width (cm)",
+            title="Espace original — 2 features choisies",
         )
-        st.plotly_chart(fig_var, width='stretch')
+        st.plotly_chart(fig_orig, width="stretch")
 
-    st.markdown("##### Comparaison : espace original (2 features) vs PCA")
-    fig_orig = plot_iris_scatter(
-        df,
-        x="petal length (cm)",
-        y="petal width (cm)",
-        title="Espace original — 2 features choisies",
-    )
-    st.plotly_chart(fig_orig, width='stretch')
-
-    # Tableau des ratios
-    var_df = pd.DataFrame(
-        {
-            "Composante": [f"PC{i+1}" for i in range(len(ratios))],
-            "Variance expliquée": ratios,
-            "Variance cumulée": np.cumsum(ratios),
-        }
-    )
-    st.dataframe(
-        var_df.style.format(
-            {"Variance expliquée": "{:.4f}", "Variance cumulée": "{:.4f}"}
-        ),
-        width='stretch',
-        hide_index=True,
-    )
+    var_df = pd.DataFrame({
+        "Composante": [f"PC{i+1}" for i in range(len(ratios))],
+        "Variance expliquée": ratios,
+        "Variance cumulée": np.cumsum(ratios),
+    })
+    with st.container(border=True):
+        plot_header("Tableau des ratios", "Détail numérique")
+        st.dataframe(
+            var_df.style.format({"Variance expliquée": "{:.4f}", "Variance cumulée": "{:.4f}"}),
+            width="stretch", hide_index=True,
+        )
 
     info_box(
         f"Avec <strong>{n_components}</strong> composantes, PCA conserve "
-        f"<strong>{ratios.sum()*100:.1f}%</strong> de la variance totale d'Iris.",
+        f"<strong style='color:#2dd4bf;'>{ratios.sum()*100:.1f}%</strong> de la variance totale d'Iris.",
         kind="success",
     )
 

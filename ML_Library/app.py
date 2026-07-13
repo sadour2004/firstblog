@@ -1,6 +1,6 @@
 """
-ML Academy Library — Point d'entrée principal.
-Lancez avec : streamlit run app.py  (depuis le dossier ML_Library)
+ML Academy Library — Landing page premium.
+Lancer : streamlit run app.py  (depuis ML_Library/)
 """
 
 import streamlit as st
@@ -12,6 +12,7 @@ from utils.style import (
     algo_card_html,
     glass_card_html,
     journey_strip_html,
+    info_box,
     footer,
     page_config,
     sidebar_brand,
@@ -19,15 +20,14 @@ from utils.style import (
 
 
 def render_home():
-    """Page d'accueil — composition premium brand-first."""
+    """Landing page — composition brand-first."""
     home_hero()
 
     section_header(
         "Objectifs du projet",
-        "Comprendre, visualiser et comparer les algorithmes étudiés ce semestre.",
+        "Comprendre, visualiser et comparer les algorithmes du semestre.",
         label="Mission",
     )
-
     c1, c2, c3 = st.columns(3, gap="medium")
     with c1:
         st.markdown(
@@ -65,47 +65,19 @@ def render_home():
         "Cinq piliers — classification et réduction de dimension.",
         label="Catalogue",
     )
-
     algos = [
-        (
-            "📍",
-            "KNN",
-            "Classification par proximité : le vote des K voisins les plus proches.",
-            "Supervisé · Classification",
-        ),
-        (
-            "🌳",
-            "Decision Tree",
-            "Partitions successives de l'espace selon Gini ou entropie.",
-            "Supervisé · Classification",
-        ),
-        (
-            "📐",
-            "SVM",
-            "Hyperplan à marge maximale, kernels linéaire, RBF ou polynomial.",
-            "Supervisé · Classification",
-        ),
-        (
-            "📉",
-            "PCA",
-            "Réduction non supervisée en maximisant la variance expliquée.",
-            "Non supervisé · Réduction",
-        ),
-        (
-            "🎯",
-            "LDA",
-            "Réduction supervisée et classification par séparabilité des classes.",
-            "Supervisé · Réduction / Classification",
-        ),
+        ("📍", "KNN", "Classification par proximité : vote des K voisins les plus proches.", "Supervisé · Classification"),
+        ("🌳", "Decision Tree", "Partitions successives de l'espace selon Gini ou entropie.", "Supervisé · Classification"),
+        ("📐", "SVM", "Hyperplan à marge maximale, kernels linéaire, RBF ou polynomial.", "Supervisé · Classification"),
+        ("📉", "PCA", "Réduction non supervisée en maximisant la variance expliquée.", "Non supervisé · Réduction"),
+        ("🎯", "LDA", "Réduction supervisée et classification par séparabilité des classes.", "Supervisé · Réduction / Classification"),
     ]
-
     row1 = st.columns(3, gap="medium")
     for col, algo in zip(row1, algos[:3]):
         with col:
             st.markdown(algo_card_html(*algo), unsafe_allow_html=True)
 
     st.markdown("<div style='height:0.85rem'></div>", unsafe_allow_html=True)
-
     row2 = st.columns([0.5, 1, 1, 0.5], gap="medium")
     with row2[1]:
         st.markdown(algo_card_html(*algos[3]), unsafe_allow_html=True)
@@ -124,7 +96,6 @@ def render_home():
         "Les outils derrière cette bibliothèque interactive.",
         label="Technologies",
     )
-
     tech_cols = st.columns(6)
     techs = [
         ("Streamlit", "Interface"),
@@ -139,8 +110,8 @@ def render_home():
             st.markdown(
                 f"""
                 <div class="tech-tile">
-                    <div class="tech-tile__name">{name}</div>
-                    <div class="tech-tile__desc">{desc}</div>
+                  <div class="tech-tile__name">{name}</div>
+                  <div class="tech-tile__desc">{desc}</div>
                 </div>
                 """,
                 unsafe_allow_html=True,
@@ -148,26 +119,21 @@ def render_home():
 
     section_header(
         "Par où commencer ?",
-        "Une suggestion de parcours pour présenter le projet.",
+        "Suggestion de parcours pour présenter le projet.",
         label="Guide",
     )
-    st.markdown(
-        """
-        <div class="info-box success">
-            Commencez par <strong style="color:#f1f5f9;">Introduction ML</strong>,
-            explorez ensuite chaque algorithme (théorie → code → démo),
-            puis terminez par <strong style="color:#f1f5f9;">Comparaison</strong>
-            pour la synthèse des performances sur Iris.
-        </div>
-        """,
-        unsafe_allow_html=True,
+    info_box(
+        "Commencez par <strong style='color:#f1f5f9;'>Introduction ML</strong>, "
+        "explorez ensuite chaque algorithme (théorie → code → démo), "
+        "puis terminez par <strong style='color:#f1f5f9;'>Comparaison</strong> "
+        "pour la synthèse des performances sur Iris.",
+        kind="success",
     )
-
     footer()
 
 
 # ---------------------------------------------------------------------------
-# Shell global + navigation
+# Shell + navigation
 # ---------------------------------------------------------------------------
 page_config("ML Academy Library")
 inject_custom_css()
@@ -175,8 +141,8 @@ sidebar_brand()
 
 st.sidebar.markdown(
     """
-    <div style="padding:0.4rem 0.2rem 0.8rem; color:#6b7c91; font-size:0.82rem; line-height:1.5;">
-        Naviguez entre les sections pour explorer théorie, code et démos interactives.
+    <div style="padding:0.35rem 0.2rem 0.9rem; color:#64768b; font-size:0.82rem; line-height:1.55;">
+      Naviguez entre les sections pour explorer théorie, code et démos interactives.
     </div>
     """,
     unsafe_allow_html=True,

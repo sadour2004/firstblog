@@ -17,6 +17,9 @@ from utils.style import (
     info_box,
     formula_box,
     footer,
+    render_score_metrics,
+    panel_header,
+    plot_header,
 )
 from utils.data_loader import load_iris_data, split_data, standardize, make_2d_classification
 from utils.model_utils import train_svm, evaluate_classifier
@@ -150,8 +153,10 @@ with tab_theory:
 # CODE
 # ===========================================================================
 with tab_code:
-    section_header("Implémentation Scikit-Learn", "SVC sur Iris")
-    st.code(
+    section_header("Implémentation Scikit-Learn", "SVC sur Iris", label="Code")
+    with st.container(border=True):
+        panel_header("📄 Script Python", "SVM avec kernel configurable")
+        st.code(
         '''from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
@@ -184,73 +189,75 @@ print(confusion_matrix(y_test, y_pred))
 # ===========================================================================
 with tab_demo:
     section_header(
-        "Démonstration interactive — Dataset Iris",
+        "Démonstration interactive",
         "Choisissez le kernel et le paramètre C.",
+        label="Live demo",
     )
 
     X, y, feature_names, target_names, df = load_iris_data()
 
-    col_a, col_b, col_c = st.columns(3)
-    with col_a:
-        kernel = st.selectbox("Kernel", ["linear", "rbf", "poly"])
-    with col_b:
-        C = st.slider("Paramètre C", 0.01, 10.0, 1.0, 0.01)
-    with col_c:
-        degree = st.slider("Degré (poly)", 2, 5, 3, disabled=(kernel != "poly"))
+    with st.container(border=True):
+        panel_header("⚙️ Paramètres du modèle", "Kernel, régularisation C et degré polynomial")
+        col_a, col_b, col_c = st.columns(3)
+        with col_a:
+            kernel = st.selectbox("Kernel", ["linear", "rbf", "poly"])
+        with col_b:
+            C = st.slider("Paramètre C", 0.01, 10.0, 1.0, 0.01)
+        with col_c:
+            degree = st.slider("Degré (poly)", 2, 5, 3, disabled=(kernel != "poly"))
 
     X_train, X_test, y_train, y_test = split_data(X, y, test_size=0.3)
     X_train_s, X_test_s, _ = standardize(X_train, X_test)
 
-    model = train_svm(
-        X_train_s, y_train, kernel=kernel, C=C, degree=degree
-    )
+    model = train_svm(X_train_s, y_train, kernel=kernel, C=C, degree=degree)
     metrics = evaluate_classifier(model, X_test_s, y_test, target_names)
 
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Accuracy", f"{metrics['accuracy']:.3f}")
-    m2.metric("Precision", f"{metrics['precision']:.3f}")
-    m3.metric("Recall", f"{metrics['recall']:.3f}")
-    m4.metric("F1-Score", f"{metrics['f1']:.3f}")
+    section_header("Résultats Iris", "Métriques sur le jeu de test", label="Performance")
+    render_score_metrics(metrics)
 
-    c_left, c_right = st.columns(2)
+    c_left, c_right = st.columns(2, gap="medium")
     with c_left:
-        fig_cm = plot_confusion_matrix(
-            metrics["confusion_matrix"],
-            target_names,
-            title=f"Matrice de confusion (kernel={kernel}, C={C})",
-        )
-        st.plotly_chart(fig_cm, width='stretch')
+        with st.container(border=True):
+            plot_header("Matrice de confusion", f"kernel={kernel} · C={C}")
+            fig_cm = plot_confusion_matrix(
+                metrics["confusion_matrix"],
+                target_names,
+                title=f"Matrice de confusion (kernel={kernel}, C={C})",
+            )
+            st.plotly_chart(fig_cm, width="stretch")
     with c_right:
-        st.markdown("##### Rapport de classification")
-        st.dataframe(
-            metrics["classification_report"].style.format("{:.3f}"),
-            width='stretch',
-        )
+        with st.container(border=True):
+            plot_header("Rapport de classification", "Détail par classe")
+            st.dataframe(
+                metrics["classification_report"].style.format("{:.3f}"),
+                width="stretch",
+            )
 
-    st.markdown("---")
     section_header(
-        "Visualisation 2D de la frontière",
-        "Dataset synthétique 2D pour illustrer l'effet du kernel.",
+        "Frontière de décision 2D",
+        "Dataset synthétique pour illustrer l'effet du kernel.",
+        label="Visualisation",
     )
     X2, y2 = make_2d_classification(n_samples=250)
     X2_train, X2_test, y2_train, y2_test = split_data(X2, y2, test_size=0.3)
     X2_train_s, X2_test_s, scaler2 = standardize(X2_train, X2_test)
     model_2d = train_svm(X2_train_s, y2_train, kernel=kernel, C=C, degree=degree)
-
-    # Afficher la frontière sur l'ensemble standardisé complet
     X2_all_s = scaler2.transform(X2)
-    fig_bd = plot_decision_boundary_2d(
-        model_2d,
-        X2_all_s,
-        y2,
-        title=f"Frontière SVM — kernel={kernel}, C={C}",
-        feature_names=("Feature 1 (scalée)", "Feature 2 (scalée)"),
-    )
-    st.pyplot(fig_bd, clear_figure=True)
+
+    with st.container(border=True):
+        plot_header("Frontière SVM", f"kernel={kernel} · C={C}")
+        fig_bd = plot_decision_boundary_2d(
+            model_2d,
+            X2_all_s,
+            y2,
+            title=f"Frontière SVM — kernel={kernel}, C={C}",
+            feature_names=("Feature 1 (scalée)", "Feature 2 (scalée)"),
+        )
+        st.pyplot(fig_bd, clear_figure=True)
 
     info_box(
         f"Sur Iris : kernel <strong>{kernel}</strong>, C=<strong>{C}</strong> → "
-        f"accuracy = <strong>{metrics['accuracy']*100:.1f}%</strong>.",
+        f"accuracy = <strong style='color:#2dd4bf;'>{metrics['accuracy']*100:.1f}%</strong>.",
         kind="success",
     )
 

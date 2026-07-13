@@ -17,6 +17,10 @@ from utils.style import (
     info_box,
     formula_box,
     footer,
+    render_score_metrics,
+    panel_header,
+    plot_header,
+    metric_card,
 )
 from utils.data_loader import load_iris_data, split_data
 from utils.model_utils import train_decision_tree, evaluate_classifier
@@ -155,8 +159,10 @@ with tab_theory:
 # CODE
 # ===========================================================================
 with tab_code:
-    section_header("Implémentation Scikit-Learn", "DecisionTreeClassifier sur Iris")
-    st.code(
+    section_header("Implémentation Scikit-Learn", "DecisionTreeClassifier sur Iris", label="Code")
+    with st.container(border=True):
+        panel_header("📄 Script Python", "Arbre de décision sur Iris")
+        st.code(
         '''from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeClassifier, plot_tree
@@ -195,19 +201,22 @@ plt.show()
 # ===========================================================================
 with tab_demo:
     section_header(
-        "Démonstration interactive — Dataset Iris",
+        "Démonstration interactive",
         "Choisissez le critère et la profondeur maximale.",
+        label="Live demo",
     )
 
     X, y, feature_names, target_names, df = load_iris_data()
 
-    col_a, col_b, col_c = st.columns(3)
-    with col_a:
-        criterion = st.selectbox("Critère", ["gini", "entropy"])
-    with col_b:
-        max_depth = st.slider("max_depth", 1, 10, 3)
-    with col_c:
-        test_size = st.slider("Taille du test (%)", 20, 40, 30, 5) / 100
+    with st.container(border=True):
+        panel_header("⚙️ Paramètres du modèle", "Critère d'impureté, profondeur et split")
+        col_a, col_b, col_c = st.columns(3)
+        with col_a:
+            criterion = st.selectbox("Critère", ["gini", "entropy"])
+        with col_b:
+            max_depth = st.slider("max_depth", 1, 10, 3)
+        with col_c:
+            test_size = st.slider("Taille du test (%)", 20, 40, 30, 5) / 100
 
     X_train, X_test, y_train, y_test = split_data(X, y, test_size=test_size)
     model = train_decision_tree(
@@ -215,39 +224,42 @@ with tab_demo:
     )
     metrics = evaluate_classifier(model, X_test, y_test, target_names)
 
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Accuracy", f"{metrics['accuracy']:.3f}")
-    m2.metric("Precision", f"{metrics['precision']:.3f}")
-    m3.metric("Recall", f"{metrics['recall']:.3f}")
-    m4.metric("F1-Score", f"{metrics['f1']:.3f}")
+    section_header("Résultats", "Métriques sur le jeu de test", label="Performance")
+    render_score_metrics(metrics)
 
-    c_left, c_right = st.columns(2)
+    c_left, c_right = st.columns(2, gap="medium")
     with c_left:
-        fig_cm = plot_confusion_matrix(
-            metrics["confusion_matrix"],
-            target_names,
-            title=f"Matrice de confusion ({criterion}, depth={max_depth})",
-        )
-        st.plotly_chart(fig_cm, width='stretch')
+        with st.container(border=True):
+            plot_header("Matrice de confusion", f"{criterion} · depth={max_depth}")
+            fig_cm = plot_confusion_matrix(
+                metrics["confusion_matrix"],
+                target_names,
+                title=f"Matrice de confusion ({criterion}, depth={max_depth})",
+            )
+            st.plotly_chart(fig_cm, width="stretch")
     with c_right:
-        fig_imp = plot_feature_importance_tree(
-            model, feature_names, title="Importance des features"
+        with st.container(border=True):
+            plot_header("Importance des features", "Contribution relative de chaque variable")
+            fig_imp = plot_feature_importance_tree(
+                model, feature_names, title="Importance des features"
+            )
+            st.plotly_chart(fig_imp, width="stretch")
+
+    with st.container(border=True):
+        plot_header("Rapport de classification", "Détail par classe")
+        st.dataframe(
+            metrics["classification_report"].style.format("{:.3f}"),
+            width="stretch",
         )
-        st.plotly_chart(fig_imp, width='stretch')
 
-    st.markdown("##### Rapport de classification")
-    st.dataframe(
-        metrics["classification_report"].style.format("{:.3f}"),
-        width='stretch',
-    )
-
-    st.markdown("##### Visualisation de l'arbre")
-    fig_tree = plot_tree_matplotlib(model, feature_names, target_names)
-    st.pyplot(fig_tree, clear_figure=True)
+    with st.container(border=True):
+        plot_header("Visualisation de l'arbre", "Structure des décisions")
+        fig_tree = plot_tree_matplotlib(model, feature_names, target_names)
+        st.pyplot(fig_tree, clear_figure=True)
 
     info_box(
         f"Critère <strong>{criterion}</strong>, profondeur max = <strong>{max_depth}</strong> → "
-        f"accuracy = <strong>{metrics['accuracy']*100:.1f}%</strong>.",
+        f"accuracy = <strong style='color:#2dd4bf;'>{metrics['accuracy']*100:.1f}%</strong>.",
         kind="success",
     )
 

@@ -20,6 +20,9 @@ from utils.style import (
     info_box,
     formula_box,
     footer,
+    render_score_metrics,
+    panel_header,
+    plot_header,
 )
 from utils.data_loader import load_iris_data, split_data
 from utils.model_utils import train_lda, train_pca, evaluate_classifier
@@ -183,8 +186,10 @@ with tab_theory:
 # CODE
 # ===========================================================================
 with tab_code:
-    section_header("Implémentation Scikit-Learn", "LDA classificateur + projection")
-    st.code(
+    section_header("Implémentation Scikit-Learn", "LDA classificateur + projection", label="Code")
+    with st.container(border=True):
+        panel_header("📄 Script Python", "LDA classification et réduction")
+        st.code(
         '''from sklearn.datasets import load_iris
 from sklearn.model_selection import train_test_split
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -216,72 +221,70 @@ X_lda = lda_2d.fit_transform(X, y)
 # ===========================================================================
 with tab_demo:
     section_header(
-        "Démonstration interactive — Dataset Iris",
+        "Démonstration interactive",
         "Classification LDA + visualisation de la projection supervisée.",
+        label="Live demo",
     )
 
     X, y, feature_names, target_names, df = load_iris_data()
 
-    test_size = st.slider("Taille du test (%)", 20, 40, 30, 5) / 100
-    X_train, X_test, y_train, y_test = split_data(X, y, test_size=test_size)
+    with st.container(border=True):
+        panel_header("⚙️ Paramètres", "Split train/test pour l'évaluation LDA")
+        test_size = st.slider("Taille du test (%)", 20, 40, 30, 5) / 100
 
-    # --- Classification ---
+    X_train, X_test, y_train, y_test = split_data(X, y, test_size=test_size)
     lda_clf = train_lda(X_train, y_train, n_components=None)
     metrics = evaluate_classifier(lda_clf, X_test, y_test, target_names)
 
-    m1, m2, m3, m4 = st.columns(4)
-    m1.metric("Accuracy", f"{metrics['accuracy']:.3f}")
-    m2.metric("Precision", f"{metrics['precision']:.3f}")
-    m3.metric("Recall", f"{metrics['recall']:.3f}")
-    m4.metric("F1-Score", f"{metrics['f1']:.3f}")
+    section_header("Résultats classificateur", "LDA utilisé comme classificateur", label="Performance")
+    render_score_metrics(metrics)
 
-    c_left, c_right = st.columns(2)
+    c_left, c_right = st.columns(2, gap="medium")
     with c_left:
-        fig_cm = plot_confusion_matrix(
-            metrics["confusion_matrix"],
-            target_names,
-            title="Matrice de confusion — LDA classificateur",
-        )
-        st.plotly_chart(fig_cm, width='stretch')
+        with st.container(border=True):
+            plot_header("Matrice de confusion", "LDA classificateur")
+            fig_cm = plot_confusion_matrix(
+                metrics["confusion_matrix"], target_names,
+                title="Matrice de confusion — LDA classificateur",
+            )
+            st.plotly_chart(fig_cm, width="stretch")
     with c_right:
-        st.markdown("##### Rapport de classification")
-        st.dataframe(
-            metrics["classification_report"].style.format("{:.3f}"),
-            width='stretch',
-        )
+        with st.container(border=True):
+            plot_header("Rapport de classification", "Détail par classe")
+            st.dataframe(
+                metrics["classification_report"].style.format("{:.3f}"),
+                width="stretch",
+            )
 
-    st.markdown("---")
     section_header(
         "Projection LDA vs PCA",
         "Même données, deux philosophies de réduction.",
+        label="Comparaison visuelle",
     )
 
-    # Projection LDA (fit sur tout le set pour la viz pédagogique)
     lda_proj = train_lda(X, y, n_components=2)
     X_lda = lda_proj.transform(X)
-
-    # Projection PCA pour comparaison
     X_scaled = StandardScaler().fit_transform(X)
     pca, X_pca = train_pca(X_scaled, n_components=2)
 
-    col_a, col_b = st.columns(2)
+    col_a, col_b = st.columns(2, gap="medium")
     with col_a:
-        fig_lda = plot_lda_2d(
-            X_lda, y, target_names, title="Projection LDA (supervisée)"
-        )
-        st.plotly_chart(fig_lda, width='stretch')
+        with st.container(border=True):
+            plot_header("LDA (supervisée)", "Maximise la séparabilité des classes")
+            fig_lda = plot_lda_2d(X_lda, y, target_names, title="Projection LDA (supervisée)")
+            st.plotly_chart(fig_lda, width="stretch")
     with col_b:
-        fig_pca = plot_pca_2d(
-            X_pca,
-            y,
-            target_names,
-            explained_variance=pca.explained_variance_ratio_,
-            title="Projection PCA (non supervisée)",
-        )
-        st.plotly_chart(fig_pca, width='stretch')
+        with st.container(border=True):
+            plot_header("PCA (non supervisée)", "Maximise la variance totale")
+            fig_pca = plot_pca_2d(
+                X_pca, y, target_names,
+                explained_variance=pca.explained_variance_ratio_,
+                title="Projection PCA (non supervisée)",
+            )
+            st.plotly_chart(fig_pca, width="stretch")
 
     info_box(
-        f"LDA classificateur → accuracy = <strong>{metrics['accuracy']*100:.1f}%</strong>. "
+        f"LDA classificateur → accuracy = <strong style='color:#2dd4bf;'>{metrics['accuracy']*100:.1f}%</strong>. "
         "Observez comment LDA sépare souvent mieux les classes que PCA en 2D.",
         kind="success",
     )
